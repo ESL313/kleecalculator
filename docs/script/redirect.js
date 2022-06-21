@@ -1,3 +1,3 @@
 setTimeout(() => {
-	window.location.replace('/');
+	window.location.replace('/kleecalculator');
 }, 5000);
