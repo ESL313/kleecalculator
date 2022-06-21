@@ -1,0 +1,43 @@
+body,
+html {
+	background-color: #444;
+	color: #fff;
+	height: 100%;
+	margin: 0;
+	word-wrap: break-word;
+}
+
+a {
+	color: #0af;
+	text-decoration: none;
+}
+
+.tablink {
+	background-color: #222;
+	border: none;
+	color: #fff;
+	float: left;
+	outline: none;
+	width: 25%;
+}
+
+.tablink:hover {
+	background-color: #333;
+}
+
+.tab {
+	display: none;
+	height: 100%;
+}
+
+.hitcount {
+	color: #fff;
+}
+
+#error {
+	color: #f00;
+}
+
+#output {
+	color: #fff;
+}

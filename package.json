@@ -1,0 +1,22 @@
+{
+	"name": "klee-calculator",
+	"version": "1.0.0",
+	"description": "A damage calculator for Klee!",
+	"main": "index.js",
+	"scripts": {
+		"server": "node scripts/server.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/ESL313/kleecalculator.git"
+	},
+	"keywords": [
+		"Klee"
+	],
+	"author": "ESL313",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/ESL313/kleecalculator/issues"
+	},
+	"homepage": "https://github.com/ESL313/kleecalculator#readme"
+}

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Klee Calculator</title>
+	<meta title="Klee Damage Calculator">
+	<meta description="A damage calculator for Klee!">
+	<link rel="stylesheet" type="text/css" href="/style/main.css">
+</head>
+
+<body>
+	<button class="tablink" onclick="openTab('rotation', this)">Rotation</button>
+	<button class="tablink" onclick="openTab('stats', this)">Stats</button>
+	<button class="tablink" onclick="openTab('buffs', this)">Buffs</button>
+	<button class="tablink" onclick="openTab('about', this)">About</button>
+
+	<div class="tab" id="rotation">Rotation<br>
+		<input id="rotation-input" type="text" placeholder="N1EQ 4(N1C)" oninput="updateRotation(this)"><br>
+		<a id="error"></a>
+
+		<!-- <div>
+			<div>
+				<div>Kaboom!</div>
+				<div>
+					1-Hit x<a class="hitcount" id="N1-hits">0</a><br>
+					2-Hit x<a class="hitcount" id="N2-hits">0</a><br>
+					3-Hit x<a class="hitcount" id="N3-hits">0</a><br>
+					Charged Attack x<a class="hitcount" id="CA-hits">0</a>
+				</div>
+			</div>
+			<div>
+				<div>Jumpy Dumpty</div>
+				<div>
+					Jumpy Dumpty x<a class="hitcount" id="E-hits">0</a><br>
+					Mine x<a class="hitcount" id="Mine-hits">0</a>
+				</div>
+			</div>
+			<div>
+				<div>Sparks 'n' Splash</div>
+				<div>
+					Sparks 'n' Splash x<a class="hitcount" id="Q-hits">0</a>
+				</div>
+			</div>
+			<div>
+				<div>Other Damage</div>
+				<div>
+					Chained Reactions x<a class="hitcount" id="C1-hits">0</a><br>
+					Sparkly Explosion x<a class="hitcount" id="C4-hits">0</a>
+				</div>
+			</div>
+		</div> -->
+		<a id="output"></a>
+	</div>
+
+	<div class="tab" id="stats">
+		Enter your Klee's stats here!<br>
+		(Coming Soon...)
+	</div>
+
+	<div class="tab" id="buffs">
+		State the buffs you used here!<br>
+		(Coming Soon...)
+	</div>
+
+	<div class="tab" id="about">
+		A damage calculator for Klee!<br>
+		Currently under construction...
+	</div>
+
+	<script src="/script/main.js"></script>
+</body>
+
+</html>
