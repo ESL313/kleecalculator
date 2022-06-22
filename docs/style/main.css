@@ -34,7 +34,8 @@ a {
 	color: #fff;
 }
 
-#error {
+#rotation-input-error,
+#enemy-input-error {
 	color: #f00;
 }
 

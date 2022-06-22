@@ -1,7 +1,7 @@
 const http = require('http');
 const fs = require('fs');
 
-const port = parseInt(process.argv[2]) || 3000;
+const port = parseFloat(process.argv[2]) || 3000;
 
 try {
 	http.createServer(function (req, res) {

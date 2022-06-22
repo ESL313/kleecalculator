@@ -22,7 +22,7 @@ let calcSettings = {
 		flat_dmg: 0,
 		def_reduction: 0,
 		def_ignore: 0,
-		amp_bonus: 1,
+		amp_bonus: 0,
 		reaction_bonus: 0,
 		enemy_level: 1,
 		enemy_elemental_res: 0.1
@@ -76,7 +76,7 @@ let calcSettings = {
 	}
 };
 
-const TALENT = 1;
+const kleeScaling = loadJSON('/kleecalculator/data/klee-scaling.json');
 
 function openTab(tab, element) {
 	const tabs = document.getElementsByClassName('tab');
@@ -93,15 +93,15 @@ function openTab(tab, element) {
 openTab('rotation', document.getElementsByClassName('tablink')[0]);
 
 function updateRotation(input) {
-	input.value = input.value.toUpperCase();
+	input = input.toUpperCase();
 
-	let rotation = expandGroups(input.value);
+	let rotation = expandGroups(input);
 	rotation = rotation.replaceAll('N2', 'N1N2').replaceAll('N3', 'N1N2N3');
 
 	if (/^(N1|N2|N3|C|E|Q|\s)*$/.test(rotation)) {
-		document.getElementById('error').innerHTML = '';
+		document.getElementById('rotation-input-error').innerHTML = '';
 	} else {
-		document.getElementById('error').innerHTML = 'Invalid Rotation';
+		document.getElementById('rotation-input-error').innerHTML = 'Invalid Rotation';
 		rotation = '';
 	}
 
@@ -134,7 +134,7 @@ function updateRotation(input) {
 }
 
 document.getElementById('rotation-input').value = 'N1EQ 4(N1C)';
-updateRotation(document.getElementById('rotation-input'));
+updateRotation('N1EQ 4(N1C)');
 
 function expandGroups(text) {
 	let output = '';
@@ -161,6 +161,35 @@ function expandGroups(text) {
 	return output;
 }
 
+function updateStats() {
+	const errorOutput = document.getElementById('enemy-input-error');
+	let enemy_level = parseFloat(document.getElementById('enemy_level').value);
+	let enemy_elemental_res = parseFloat(document.getElementById('enemy_elemental_res').value);
+	if ((1 > enemy_level || enemy_level > 100) || !Number.isInteger(enemy_level)) {
+		errorOutput.innerHTML = 'Enemy level is invalid.';
+		enemy_level = 1;
+	} else if ((-100 > enemy_elemental_res || enemy_elemental_res > 100) || !Number.isInteger(enemy_elemental_res)) {
+		errorOutput.innerHTML = 'Enemy elemental resistance is invalid.';
+		enemy_elemental_res = 10;
+	} else errorOutput.innerHTML = '';
+	let level = document.getElementById('level').value;
+	for (const stat in kleeScaling.level[level]) calcSettings.stats[stat] = kleeScaling.level[level][stat];
+
+	// placeholder for weapon code
+	calcSettings.stats.atk_base += 23;
+
+	calcSettings.stats.level = parseInt(level.split('/')[0]);
+	calcSettings.stats.talent_normal_attack = document.getElementById('talent_normal_attack').value;
+	calcSettings.stats.talent_elemental_skill = document.getElementById('talent_elemental_skill').value;
+	calcSettings.stats.talent_elemental_burst = document.getElementById('talent_elemental_burst').value;
+	calcSettings.stats.enemy_level = enemy_level;
+	calcSettings.stats.enemy_elemental_res = enemy_elemental_res / 100;
+
+	updateOutput(calculate(calcSettings));
+}
+
+updateStats();
+
 function calculate(input) {
 	let output = {};
 
@@ -170,6 +199,7 @@ function calculate(input) {
 
 		for (const buff in input.hits[hit].buffs) stats[buff] += input.hits[hit].buffs[buff];
 
+		// damage formula source: https://library.keqingmains.com/combat-mechanics/damage/damage-formula
 		if (stats.crit_rate > 1) stats.crit_rate = 1;
 
 		if (stats.def_reduction > 0.9) stats.def_reduction = 0.9;
@@ -178,10 +208,14 @@ function calculate(input) {
 		else if (stats.enemy_elemental_res >= 0.75) stats.elemental_res_multi = 1 / (4 * stats.enemy_elemental_res + 1);
 		else stats.elemental_res_multi = 1 - stats.enemy_elemental_res;
 
-		if (stats.amp_bonus === 1) stats.reaction_multi = 1;
+		if (stats.amp_bonus === 0) stats.reaction_multi = 1;
 		else stats.reaction_multi = stats.amp_bonus * (1 + ((2.78 * stats.em) / (1400 + stats.em)) + stats.reaction_bonus);
 
-		output[hit] = input.hits[hit].instance * Math.round(((TALENT * (stats.atk_base * (1 + stats.atk_percentage) + stats.atk_flat)) + stats.flat_dmg) * (1 + stats.dmg_bonus) * (1 + stats.crit_rate * stats.crit_dmg) * ((stats.level + 100) / ((stats.level + 100) + (stats.enemy_level + 100) * (1 - stats.def_reduction) * (1 - stats.def_ignore))) * stats.elemental_res_multi * stats.reaction_multi);
+
+		let talentValue = 1;
+		if (kleeScaling.talents[hit]) talentValue = kleeScaling.talents[hit].scaling[stats[kleeScaling.talents[hit].scaleWith]];
+
+		output[hit] = input.hits[hit].instance * Math.round(((talentValue * (stats.atk_base * (1 + stats.atk_percentage) + stats.atk_flat)) + stats.flat_dmg) * (1 + stats.dmg_bonus) * (1 + stats.crit_rate * stats.crit_dmg) * ((stats.level + 100) / ((stats.level + 100) + (stats.enemy_level + 100) * (1 - stats.def_reduction) * (1 - stats.def_ignore))) * stats.elemental_res_multi * stats.reaction_multi);
 	}
 
 	return output;
@@ -198,4 +232,19 @@ function updateOutput(input) {
 	output += `total: ${total.toFixed(2)}`;
 
 	document.getElementById('output').innerHTML = output;
+}
+
+function loadJSON(url) {
+	let output = {};
+	let request = new XMLHttpRequest();
+	request.open('GET', url, false);
+	request.onload = () => {
+		if (request.status === 200) {
+			output = JSON.parse(request.response);
+		} else {
+			// handle error somehow, probably gonna just say that this tool does not support old browsers or something
+		}
+	};
+	request.send();
+	return output;
 }

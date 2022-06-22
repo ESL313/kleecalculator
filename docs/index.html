@@ -15,8 +15,8 @@
 	<button class="tablink" onclick="openTab('about', this)">About</button>
 
 	<div class="tab" id="rotation">Rotation<br>
-		<input id="rotation-input" type="text" placeholder="N1EQ 4(N1C)" oninput="updateRotation(this)"><br>
-		<a id="error"></a><br>
+		<input id="rotation-input" type="text" placeholder="N1EQ 4(N1C)" oninput="updateRotation(this.value)"><br>
+		<a id="rotation-input-error"></a><br>
 
 		<!-- <div>
 			<div>
@@ -53,8 +53,69 @@
 	</div>
 
 	<div class="tab" id="stats">
-		Enter your Klee's stats here!<br>
-		(Coming Soon...)
+		Klee:<br>
+		Level:
+		<select id="level" onchange="updateStats()">
+			<option value="1/20">1/20</option>
+			<option value="20/20">20/20</option>
+			<option value="20/40">20/40</option>
+			<option value="40/40">40/40</option>
+			<option value="40/50">40/50</option>
+			<option value="50/50">50/50</option>
+			<option value="50/60">50/60</option>
+			<option value="60/60">60/60</option>
+			<option value="60/70">60/70</option>
+			<option value="70/70">70/70</option>
+			<option value="70/80">70/80</option>
+			<option value="80/80">80/80</option>
+			<option value="80/90">80/90</option>
+			<option value="90/90">90/90</option>
+		</select><br>
+		Talents:<br>
+		Normal Attack:
+		<select id="talent_normal_attack" onchange="updateStats()">
+			<option value="1">1</option>
+			<option value="2">2</option>
+			<option value="3">3</option>
+			<option value="4">4</option>
+			<option value="5">5</option>
+			<option value="6">6</option>
+			<option value="7">7</option>
+			<option value="8">8</option>
+			<option value="9">9</option>
+			<option value="10">10</option>
+		</select><br>
+		Elemental Skill:
+		<select id="talent_elemental_skill" onchange="updateStats()">
+			<option value="1">1</option>
+			<option value="2">2</option>
+			<option value="3">3</option>
+			<option value="4">4</option>
+			<option value="5">5</option>
+			<option value="6">6</option>
+			<option value="7">7</option>
+			<option value="8">8</option>
+			<option value="9">9</option>
+			<option value="10">10</option>
+		</select><br>
+		Elemental Burst:
+		<select id="talent_elemental_burst" onchange="updateStats()">
+			<option value="1">1</option>
+			<option value="2">2</option>
+			<option value="3">3</option>
+			<option value="4">4</option>
+			<option value="5">5</option>
+			<option value="6">6</option>
+			<option value="7">7</option>
+			<option value="8">8</option>
+			<option value="9">9</option>
+			<option value="10">10</option>
+		</select><br>
+		Weapon: Apprentice's Notes, level 1<br><br>
+		Enemy:<br>
+		Level:<input type="number" id="enemy_level" min="1" max="100" step="1" value="1" oninput="updateStats()"><br>
+		Elemental Resistance:<input type="number" id="enemy_elemental_res" min="-100" max="100" step="1" value="10" oninput="updateStats()">%<br>
+		<a id="enemy-input-error"></a>
 	</div>
 
 	<div class="tab" id="buffs">
