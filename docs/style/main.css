@@ -42,3 +42,7 @@ a {
 #output {
 	color: #fff;
 }
+
+select option:disabled {
+    display:none;
+}
