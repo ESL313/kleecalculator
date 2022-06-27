@@ -180,7 +180,7 @@ function updateStats() {
 	// placeholder for weapon code
 	let selectedWeapon = weapons.WeaponList[document.getElementById("weapon_name").value];
 	calcSettings.stats.atk_base += weapons.BaseATKScaling[selectedWeapon.Star][selectedWeapon.BaseATK][document.getElementById("weapon_level").selectedIndex];
-	calcSettings.stats[selectedWeapon.Substat] += weapons.SubstatScaling[selectedWeapon.BaseSub][Math.floor(document.getElementById("weapon_level").selectedIndex/2)]
+	calcSettings.stats[selectedWeapon.Substat] += weapons.SubstatScaling[selectedWeapon.BaseSub][Math.ceil(document.getElementById("weapon_level").selectedIndex/2)]
 
 	calcSettings.stats.level = parseInt(level.split('/')[0]);
 	calcSettings.stats.talent_normal_attack = document.getElementById('talent_normal_attack').value;
@@ -266,14 +266,12 @@ function updateLevel() {
 function addWeaponSelection() {
 	let weaponSelection = document.getElementById("weapon_name");
 	let weaponNames = Object.keys(weapons.WeaponList);
-	let id = 0;
-	for (const property in weapons.WeaponList) {
+	weaponNames.forEach(element => {
 		let option = document.createElement("option");
-		option.text = weaponNames[id];
-		option.value = weaponNames[id];
-		id++;
+		option.text = element;
+		option.value = element;
 		weaponSelection.add(option);
-	}
+	});
 	updateLevel();
 }
 addWeaponSelection();
