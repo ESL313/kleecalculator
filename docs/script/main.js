@@ -78,6 +78,8 @@ let calcSettings = {
 
 const kleeScaling = loadJSON('/kleecalculator/data/klee-scaling.json');
 
+const weapons = loadJSON('/kleecalculator/data/weapons.json');
+
 function openTab(tab, element) {
 	const tabs = document.getElementsByClassName('tab');
 	for (let i = 0; i < tabs.length; i++) tabs[i].style.display = 'none';
@@ -176,7 +178,9 @@ function updateStats() {
 	for (const stat in kleeScaling.level[level]) calcSettings.stats[stat] = kleeScaling.level[level][stat];
 
 	// placeholder for weapon code
-	calcSettings.stats.atk_base += 23;
+	let selectedWeapon = weapons.WeaponList[document.getElementById("weapon_name").value];
+	calcSettings.stats.atk_base += weapons.BaseATKScaling[selectedWeapon.Star][selectedWeapon.BaseATK][document.getElementById("weapon_level").selectedIndex];
+	calcSettings.stats[selectedWeapon.Substat] += weapons.SubstatScaling[selectedWeapon.BaseSub][Math.floor(document.getElementById("weapon_level").selectedIndex/2)]
 
 	calcSettings.stats.level = parseInt(level.split('/')[0]);
 	calcSettings.stats.talent_normal_attack = document.getElementById('talent_normal_attack').value;
@@ -187,8 +191,6 @@ function updateStats() {
 
 	updateOutput(calculate(calcSettings));
 }
-
-updateStats();
 
 function calculate(input) {
 	let output = {};
@@ -248,3 +250,30 @@ function loadJSON(url) {
 	request.send();
 	return output;
 }
+
+// Weapon stuff
+function updateLevel() {
+	let selectedWeapon = document.getElementById("weapon_name").value;
+	let disable70 = weapons.WeaponList[selectedWeapon].Star < 3;
+	let list70 = document.getElementsByClassName("70+");
+	Array.from(list70).forEach(element => {
+		element.disabled = disable70;
+	}); 
+	document.getElementById("weapon_level").selectedIndex = 0;
+	updateStats();
+}
+
+function addWeaponSelection() {
+	let weaponSelection = document.getElementById("weapon_name");
+	let weaponNames = Object.keys(weapons.WeaponList);
+	let id = 0;
+	for (const property in weapons.WeaponList) {
+		let option = document.createElement("option");
+		option.text = weaponNames[id];
+		option.value = weaponNames[id];
+		id++;
+		weaponSelection.add(option);
+	}
+	updateLevel();
+}
+addWeaponSelection();
