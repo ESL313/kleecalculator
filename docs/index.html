@@ -2,153 +2,547 @@
 <html>
 
 <head>
-	<title>Klee Calculator</title>
-	<meta title="Klee Damage Calculator">
-	<meta description="A damage calculator for Klee!">
+	<title>Klee Damage Calculator</title>
+
+	<meta name="title" content="Klee Damage Calculator">
+	<meta name="description" content="A Genshin Impact damage calculator for Klee!">
+	<meta name="keywords" content="Klee">
+	<meta name="robots" content="index, follow">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="language" content="English">
+	<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
+
+	<link rel="apple-touch-icon" sizes="57x57" href="/kleecalculator/favicon/apple-touch-icon-57x57.png">
+	<link rel="apple-touch-icon" sizes="60x60" href="/kleecalculator/favicon/apple-touch-icon-60x60.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="/kleecalculator/favicon/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="/kleecalculator/favicon/apple-touch-icon-76x76.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="/kleecalculator/favicon/apple-touch-icon-114x114.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="/kleecalculator/favicon/apple-touch-icon-120x120.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="/kleecalculator/favicon/apple-touch-icon-144x144.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="/kleecalculator/favicon/apple-touch-icon-152x152.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="/kleecalculator/favicon/apple-touch-icon-180x180.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/kleecalculator/favicon/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="192x192" href="/kleecalculator/favicon/android-chrome-192x192.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/kleecalculator/favicon/favicon-16x16.png">
+	<link rel="manifest" href="/kleecalculator/favicon/site.webmanifest">
+	<link rel="mask-icon" href="/kleecalculator/favicon/safari-pinned-tab.svg" color="#ef7938">
+	<link rel="shortcut icon" href="/kleecalculator/favicon/favicon.ico">
+	<meta name="apple-mobile-web-app-title" content="Klee Calculator">
+	<meta name="application-name" content="Klee Calculator">
+	<meta name="msapplication-TileColor" content="#ef7938">
+	<meta name="msapplication-TileImage" content="/kleecalculator/favicon/mstile-144x144.png">
+	<meta name="msapplication-config" content="/kleecalculator/favicon/browserconfig.xml">
+	<meta name="theme-color" content="#ef7938">
+
 	<link rel="stylesheet" type="text/css" href="/kleecalculator/style/main.css">
+	<link rel="stylesheet" type="text/css" href="/kleecalculator/style/index.css">
 </head>
 
 <body>
-	<button class="tablink" onclick="openTab('rotation', this)">Rotation</button>
-	<button class="tablink" onclick="openTab('stats', this)">Stats</button>
-	<button class="tablink" onclick="openTab('buffs', this)">Buffs</button>
-	<button class="tablink" onclick="openTab('about', this)">About</button>
-
-	<div class="tab" id="rotation">Rotation<br>
-		<input id="rotation-input" type="text" placeholder="N1EQ 4(N1C)" oninput="updateRotation(this.value)"><br>
-		<a id="rotation-input-error"></a><br>
-
-		<!-- <div>
-			<div>
-				<div>Kaboom!</div>
-				<div>
-					1-Hit x<a class="hitcount" id="N1-hits">0</a><br>
-					2-Hit x<a class="hitcount" id="N2-hits">0</a><br>
-					3-Hit x<a class="hitcount" id="N3-hits">0</a><br>
-					Charged Attack x<a class="hitcount" id="CA-hits">0</a>
-				</div>
-			</div>
-			<div>
-				<div>Jumpy Dumpty</div>
-				<div>
-					Jumpy Dumpty x<a class="hitcount" id="E-hits">0</a><br>
-					Mine x<a class="hitcount" id="Mine-hits">0</a>
-				</div>
-			</div>
-			<div>
-				<div>Sparks 'n' Splash</div>
-				<div>
-					Sparks 'n' Splash x<a class="hitcount" id="Q-hits">0</a>
-				</div>
-			</div>
-			<div>
-				<div>Other Damage</div>
-				<div>
-					Chained Reactions x<a class="hitcount" id="C1-hits">0</a><br>
-					Sparkly Explosion x<a class="hitcount" id="C4-hits">0</a>
-				</div>
-			</div>
-		</div> -->
-		<a id="output"></a>
+	<div id="header">
+		<div id="tabs">
+			<div id="tab-rotation" class="tab selected-tab">Rotation</div>
+			<div id="tab-stats" class="tab">Stats</div>
+			<div id="tab-buffs" class="tab">Buffs</div>
+			<div id="tab-about" class="tab">About</div>
+		</div>
+		<div id="tab-indicator"></div>
 	</div>
 
-	<div class="tab" id="stats">
-		Klee:<br>
-		Level:
-		<select id="level" onchange="updateStats()">
-			<option value="1/20">1/20</option>
-			<option value="20/20">20/20</option>
-			<option value="20/40">20/40</option>
-			<option value="40/40">40/40</option>
-			<option value="40/50">40/50</option>
-			<option value="50/50">50/50</option>
-			<option value="50/60">50/60</option>
-			<option value="60/60">60/60</option>
-			<option value="60/70">60/70</option>
-			<option value="70/70">70/70</option>
-			<option value="70/80">70/80</option>
-			<option value="80/80">80/80</option>
-			<option value="80/90">80/90</option>
-			<option value="90/90">90/90</option>
-		</select><br>
-		Talents:<br>
-		Normal Attack:
-		<select id="talent_normal_attack" onchange="updateStats()">
-			<option value="1">1</option>
-			<option value="2">2</option>
-			<option value="3">3</option>
-			<option value="4">4</option>
-			<option value="5">5</option>
-			<option value="6">6</option>
-			<option value="7">7</option>
-			<option value="8">8</option>
-			<option value="9">9</option>
-			<option value="10">10</option>
-		</select><br>
-		Elemental Skill:
-		<select id="talent_elemental_skill" onchange="updateStats()">
-			<option value="1">1</option>
-			<option value="2">2</option>
-			<option value="3">3</option>
-			<option value="4">4</option>
-			<option value="5">5</option>
-			<option value="6">6</option>
-			<option value="7">7</option>
-			<option value="8">8</option>
-			<option value="9">9</option>
-			<option value="10">10</option>
-		</select><br>
-		Elemental Burst:
-		<select id="talent_elemental_burst" onchange="updateStats()">
-			<option value="1">1</option>
-			<option value="2">2</option>
-			<option value="3">3</option>
-			<option value="4">4</option>
-			<option value="5">5</option>
-			<option value="6">6</option>
-			<option value="7">7</option>
-			<option value="8">8</option>
-			<option value="9">9</option>
-			<option value="10">10</option>
-		</select><br><br>
-		Weapon:
-		<select id="weapon_name" onchange="updateLevel()">
+	<div id="content-rotation" class="content selected-content">
+		<br>Enter your rotation here!<br>
+		<input id="rotation-input" type="text" placeholder="N1EQ 4(N1C)"><br>
+		<span id="rotation-error-message"></span>
 
-		</select><br>
-		Level:
-		<select id="weapon_level" onchange="updateStats()">
-			<option value="1/20">1/20</option>
-			<option value="20/20">20/20</option>
-			<option value="20/40">20/40</option>
-			<option value="40/40">40/40</option>
-			<option value="40/50">40/50</option>
-			<option value="50/50">50/50</option>
-			<option value="50/60">50/60</option>
-			<option value="60/60">60/60</option>
-			<option value="60/70">60/70</option>
-			<option value="70/70">70/70</option>
-			<option class="70+" value="70/80">70/80</option>
-			<option class="70+" value="80/80">80/80</option>
-			<option class="70+" value="80/90">80/90</option>
-			<option class="70+" value="90/90">90/90</option>
-		</select><br><br>
-		Enemy:<br>
-		Level:<input type="number" id="enemy_level" min="1" max="100" step="1" value="1" oninput="updateStats()"><br>
-		Elemental Resistance:<input type="number" id="enemy_elemental_res" min="-100" max="100" step="1" value="10" oninput="updateStats()">%<br>
-		<a id="enemy-input-error"></a>
+		<div class="group-damage-output">
+			<div class="group-damage-header">
+				<div id="normal-attack" class="hit-damage">
+					<div class="hit-damage-image"><img src="/kleecalculator/media/character/klee/normal_attack.png"></div>
+					<div class="hit-damage-name">Kaboom!</div>
+					<div class="hit-damage-total">0</div>
+					<div class="hit-damage-share">0%</div>
+				</div>
+			</div>
+			<div class="group-damage-content">
+				<div id="normal-attack-1" class="hit-damage">
+					<div class="hit-damage-image"></div>
+					<div class="hit-damage-name"><span class="pyro-color">1-Hit</span></div>
+					<div class="hit-damage-total"><span class="pyro-color">0</span></div>
+					<div class="hit-damage-share"><span class="pyro-color">0%</span></div>
+				</div>
+				<div id="normal-attack-2" class="hit-damage">
+					<div class="hit-damage-image"></div>
+					<div class="hit-damage-name"><span class="pyro-color">2-Hit</span></div>
+					<div class="hit-damage-total"><span class="pyro-color">0</span></div>
+					<div class="hit-damage-share"><span class="pyro-color">0%</span></div>
+				</div>
+				<div id="normal-attack-3" class="hit-damage">
+					<div class="hit-damage-image"></div>
+					<div class="hit-damage-name"><span class="pyro-color">3-Hit</span></div>
+					<div class="hit-damage-total"><span class="pyro-color">0</span></div>
+					<div class="hit-damage-share"><span class="pyro-color">0%</span></div>
+				</div>
+				<div id="normal-attack-charged" class="hit-damage">
+					<div class="hit-damage-image"></div>
+					<div class="hit-damage-name"><span class="pyro-color">Charged Attack</span></div>
+					<div class="hit-damage-total"><span class="pyro-color">0</span></div>
+					<div class="hit-damage-share"><span class="pyro-color">0%</span></div>
+				</div>
+			</div>
+			<div class="group-damage-footer">
+				<div class="group-damage-arrow-flip">
+					<div class="group-damage-arrow"></div>
+				</div>
+			</div>
+		</div>
+
+		<div class="group-damage-output">
+			<div class="group-damage-header">
+				<div id="elemental-skill" class="hit-damage">
+					<div class="hit-damage-image"><img src="/kleecalculator/media/character/klee/elemental_skill.png"></div>
+					<div class="hit-damage-name">Jumpy Dumpty</div>
+					<div class="hit-damage-total">0</div>
+					<div class="hit-damage-share">0%</div>
+				</div>
+			</div>
+			<div class="group-damage-content">
+				<div id="elemental-skill-bounce" class="hit-damage">
+					<div class="hit-damage-image"></div>
+					<div class="hit-damage-name"><span class="pyro-color">Jumpy Dumpty</span></div>
+					<div class="hit-damage-total"><span class="pyro-color">0</span></div>
+					<div class="hit-damage-share"><span class="pyro-color">0%</span></div>
+				</div>
+				<div id="elemental-skill-mine" class="hit-damage">
+					<div class="hit-damage-image"></div>
+					<div class="hit-damage-name"><span class="pyro-color">Mine</span></div>
+					<div class="hit-damage-total"><span class="pyro-color">0</span></div>
+					<div class="hit-damage-share"><span class="pyro-color">0%</span></div>
+				</div>
+			</div>
+			<div class="group-damage-footer">
+				<div class="group-damage-arrow-flip">
+					<div class="group-damage-arrow"></div>
+				</div>
+			</div>
+		</div>
+
+		<div class="group-damage-output">
+			<div class="group-damage-header">
+				<div id="elemental-burst" class="hit-damage">
+					<div class="hit-damage-image"><img src="/kleecalculator/media/character/klee/elemental_burst.png"></div>
+					<div class="hit-damage-name">Sparks 'n' Splash</div>
+					<div class="hit-damage-total">0</div>
+					<div class="hit-damage-share">0%</div>
+				</div>
+			</div>
+			<div class="group-damage-content">
+				<div id="elemental-burst-hit" class="hit-damage">
+					<div class="hit-damage-image"></div>
+					<div class="hit-damage-name"><span class="pyro-color">Sparks 'n' Splash</span></div>
+					<div class="hit-damage-total"><span class="pyro-color">0</span></div>
+					<div class="hit-damage-share"><span class="pyro-color">0%</span></div>
+				</div>
+			</div>
+			<div class="group-damage-footer">
+				<div class="group-damage-arrow-flip">
+					<div class="group-damage-arrow"></div>
+				</div>
+			</div>
+		</div>
+
+		<div class="group-damage-output">
+			<div class="group-damage-header">
+				<div id="other-damage" class="hit-damage">
+					<div class="hit-damage-image"></div>
+					<div class="hit-damage-name">Other Damage Sources</div>
+					<div class="hit-damage-total">0</div>
+					<div class="hit-damage-share">0%</div>
+				</div>
+			</div>
+			<div class="group-damage-content">
+				<div id="other-damage-c1" class="hit-damage">
+					<div class="hit-damage-image"><img src="/kleecalculator/media/character/klee/constellation_1.png"></div>
+					<div class="hit-damage-name"><span class="pyro-color">Chained Reactions</span></div>
+					<div class="hit-damage-total"><span class="pyro-color">0</span></div>
+					<div class="hit-damage-share"><span class="pyro-color">0%</span></div>
+				</div>
+				<div id="other-damage-c4" class="hit-damage">
+					<div class="hit-damage-image"><img src="/kleecalculator/media/character/klee/constellation_4.png"></div>
+					<div class="hit-damage-name"><span class="pyro-color">Sparkly Explosion</span></div>
+					<div class="hit-damage-total"><span class="pyro-color">0</span></div>
+					<div class="hit-damage-share"><span class="pyro-color">0%</span></div>
+				</div>
+			</div>
+			<div class="group-damage-footer">
+				<div class="group-damage-arrow-flip">
+					<div class="group-damage-arrow"></div>
+				</div>
+			</div>
+		</div>
+
+		<div class="group-damage-output">
+			<div class="group-damage-header">
+				<div id="total-damage" class="hit-damage">
+					<div class="hit-damage-image"></div>
+					<div class="hit-damage-name">Total Damage</div>
+					<div class="hit-damage-total">0</div>
+					<div class="hit-damage-share">100%</div>
+				</div>
+			</div>
+			<div class="group-damage-content">
+				<div id="total-damage-normal" class="hit-damage">
+					<div class="hit-damage-image"><img src="/kleecalculator/media/miscellaneous/damage_type/pyro.png"></div>
+					<div class="hit-damage-name"><span class="pyro-color">Pyro Damage</span></div>
+					<div class="hit-damage-total"><span class="pyro-color">0</span></div>
+					<div class="hit-damage-share"><span class="pyro-color">0%</span></div>
+				</div>
+				<div id="total-damage-vape" class="hit-damage">
+					<div class="hit-damage-image"><img src="/kleecalculator/media/miscellaneous/damage_type/hydro.png"></div>
+					<div class="hit-damage-name"><span class="hydro-color">Vaped Damage</span></div>
+					<div class="hit-damage-total"><span class="hydro-color">0</span></div>
+					<div class="hit-damage-share"><span class="hydro-color">0%</span></div>
+				</div>
+				<div id="total-damage-melt" class="hit-damage">
+					<div class="hit-damage-image"><img src="/kleecalculator/media/miscellaneous/damage_type/cryo.png"></div>
+					<div class="hit-damage-name"><span class="cryo-color">Melted Damage</span></div>
+					<div class="hit-damage-total"><span class="cryo-color">0</span></div>
+					<div class="hit-damage-share"><span class="cryo-color">0%</span></div>
+				</div>
+				<div id="total-damage-normal" class="hit-damage">
+					<div class="hit-damage-image"><img src="/kleecalculator/media/miscellaneous/damage_type/physical.png"></div>
+					<div class="hit-damage-name"><span class="physical-color">Physical Damage</span></div>
+					<div class="hit-damage-total"><span class="physical-color">0</span></div>
+					<div class="hit-damage-share"><span class="physical-color">0%</span></div>
+				</div>
+			</div>
+			<div class="group-damage-footer">
+				<div class="group-damage-arrow-flip">
+					<div class="group-damage-arrow"></div>
+				</div>
+			</div>
+		</div>
 	</div>
 
-	<div class="tab" id="buffs">
-		State the buffs you used here!<br>
-		(Coming Soon...)
+	<div id="content-stats" class="content">
+		<div class="stats-section">
+			<div class="stats-details">
+				<div class="stats-details-image"><img src="/kleecalculator/media/character/klee/icon.png"></div>
+				<div class="stats-details-content">
+					<div class="column-split">
+						<div class="align-left">
+							Level:
+							<div id="character-level" class="small-select-menu">
+								<div class="select-options">
+									<div class="select-option selected-option">1/20</div>
+									<div class="select-option">20/20</div>
+									<div class="select-option">20/40</div>
+									<div class="select-option">40/40</div>
+									<div class="select-option">40/50</div>
+									<div class="select-option">50/50</div>
+									<div class="select-option">50/60</div>
+									<div class="select-option">60/60</div>
+									<div class="select-option">60/70</div>
+									<div class="select-option">70/70</div>
+									<div class="select-option">70/80</div>
+									<div class="select-option">80/80</div>
+									<div class="select-option">80/90</div>
+									<div class="select-option">90/90</div>
+								</div>
+								<div class="select-label">
+									<div class="select-content">1/20</div>
+								</div>
+							</div><br>
+
+							Talents:
+							<div id="talent-inputs">
+								<img src="/kleecalculator/media/character/klee/normal_attack.png">
+								<div id="normal-attack-level" class="small-input-range" data-min="1" data-max="1">
+									<div class="range-decrease range-disable" data-value="-1">-1</div>
+									<div class="range-current default-text-color">1</div>
+									<div class="range-increase range-disable" data-value="1">+1</div>
+								</div>
+								<img src="/kleecalculator/media/character/klee/elemental_skill.png">
+								<div id="elemental-skill-level" class="small-input-range" data-min="1" data-max="1">
+									<div class="range-decrease range-disable" data-value="-1">-1</div>
+									<div class="range-current default-text-color">1</div>
+									<div class="range-increase range-disable" data-value="1">+1</div>
+								</div>
+								<img src="/kleecalculator/media/character/klee/elemental_skill.png">
+								<div id="elemental-burst-level" class="small-input-range" data-min="1" data-max="1">
+									<div class="range-decrease range-disable" data-value="-1">-1</div>
+									<div class="range-current default-text-color">1</div>
+									<div class="range-increase range-disable" data-value="1">+1</div>
+								</div>
+							</div>
+						</div>
+						<div id="constellations">
+							<img id="constellation_1" class="constellation-image" src="/kleecalculator/media/character/klee/constellation_1.png">
+							<img id="constellation_2" class="constellation-image" src="/kleecalculator/media/character/klee/constellation_2.png">
+							<img id="constellation_3" class="constellation-image" src="/kleecalculator/media/character/klee/constellation_3.png">
+							<img id="constellation_4" class="constellation-image" src="/kleecalculator/media/character/klee/constellation_4.png">
+							<img id="constellation_5" class="constellation-image" src="/kleecalculator/media/character/klee/constellation_5.png">
+							<img id="constellation_6" class="constellation-image" src="/kleecalculator/media/character/klee/constellation_6.png">
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div id="current-equipment">
+				<div class="equipment">
+					<div class="equipment-header"><img src="/kleecalculator/media/miscellaneous/weapon/catalyst.png"> Weapon</div>
+					<div id="weapon" class="equipment-content modal-button">?</div>
+				</div>
+				<div class="equipment">
+					<div class="equipment-header"><img src="/kleecalculator/media/miscellaneous/artifact/flower.png"> Flower</div>
+					<div id="flower" class="equipment-content modal-button">?</div>
+				</div>
+				<div class="equipment">
+					<div class="equipment-header"><img src="/kleecalculator/media/miscellaneous/artifact/plume.png"> Plume</div>
+					<div id="plume" class="equipment-content modal-button">?</div>
+				</div>
+				<div class="equipment">
+					<div class="equipment-header"><img src="/kleecalculator/media/miscellaneous/artifact/sands.png"> Sands</div>
+					<div id="sands" class="equipment-content modal-button">?</div>
+				</div>
+				<div class="equipment">
+					<div class="equipment-header"><img src="/kleecalculator/media/miscellaneous/artifact/goblet.png"> Goblet</div>
+					<div id="goblet" class="equipment-content modal-button">?</div>
+				</div>
+				<div class="equipment">
+					<div class="equipment-header"><img src="/kleecalculator/media/miscellaneous/artifact/circlet.png"> Circlet</div>
+					<div id="circlet" class="equipment-content modal-button">?</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="stats-section">
+			<div class="stats-details">
+				<div class="stats-details-image"><img src="/kleecalculator/media/miscellaneous/enemy/hilichurl.png"></div>
+				<div class="stats-details-content align-left">
+					Level:
+					<div id="enemy-level" class="small-select-menu">
+						<div class="select-options">
+							<div class="select-option selected-option">1</div>
+							<div class="select-option">10</div>
+							<div class="select-option">20</div>
+							<div class="select-option">30</div>
+							<div class="select-option">40</div>
+							<div class="select-option">50</div>
+							<div class="select-option">60</div>
+							<div class="select-option">70</div>
+							<div class="select-option">80</div>
+							<div class="select-option">90</div>
+							<div class="select-option">100</div>
+						</div>
+						<div class="select-label">
+							<div class="select-content">1</div>
+						</div>
+					</div><br>
+
+					Resistance:
+					<div class="column-split">
+						<div class="resistance-inputs">
+							<img src="/kleecalculator/media/miscellaneous/damage_type/pyro.png">
+							<div id="pyro-resistance" class="large-input-range" data-min="-100" data-max="100" data-percent="true">
+								<div class="range-decrease" data-value="-10">-10%</div>
+								<div class="range-decrease" data-value="-1">-1%</div>
+								<div class="range-current pyro-color">10%</div>
+								<div class="range-increase" data-value="1">+1%</div>
+								<div class="range-increase" data-value="10">+10%</div>
+							</div>
+							<img src="/kleecalculator/media/miscellaneous/damage_type/hydro.png">
+							<div id="hydro-resistance" class="large-input-range" data-min="-100" data-max="100" data-percent="true">
+								<div class="range-decrease" data-value="-10">-10%</div>
+								<div class="range-decrease" data-value="-1">-1%</div>
+								<div class="range-current hydro-color">10%</div>
+								<div class="range-increase" data-value="1">+1%</div>
+								<div class="range-increase" data-value="10">+10%</div>
+							</div>
+							<img src="/kleecalculator/media/miscellaneous/damage_type/electro.png">
+							<div id="electro-resistance" class="large-input-range" data-min="-100" data-max="100" data-percent="true">
+								<div class="range-decrease" data-value="-10">-10%</div>
+								<div class="range-decrease" data-value="-1">-1%</div>
+								<div class="range-current electro-color">10%</div>
+								<div class="range-increase" data-value="1">+1%</div>
+								<div class="range-increase" data-value="10">+10%</div>
+							</div>
+							<img src="/kleecalculator/media/miscellaneous/damage_type/cryo.png">
+							<div id="cryo-resistance" class="large-input-range" data-min="-100" data-max="100" data-percent="true">
+								<div class="range-decrease" data-value="-10">-10%</div>
+								<div class="range-decrease" data-value="-1">-1%</div>
+								<div class="range-current cryo-color">10%</div>
+								<div class="range-increase" data-value="1">+1%</div>
+								<div class="range-increase" data-value="10">+10%</div>
+							</div>
+						</div>
+						<div class="resistance-inputs">
+							<img src="/kleecalculator/media/miscellaneous/damage_type/anemo.png">
+							<div id="anemo-resistance" class="large-input-range" data-min="-100" data-max="100" data-percent="true">
+								<div class="range-decrease" data-value="-10">-10%</div>
+								<div class="range-decrease" data-value="-1">-1%</div>
+								<div class="range-current anemo-color">10%</div>
+								<div class="range-increase" data-value="1">+1%</div>
+								<div class="range-increase" data-value="10">+10%</div>
+							</div>
+							<img src="/kleecalculator/media/miscellaneous/damage_type/geo.png">
+							<div id="geo-resistance" class="large-input-range" data-min="-100" data-max="100" data-percent="true">
+								<div class="range-decrease" data-value="-10">-10%</div>
+								<div class="range-decrease" data-value="-1">-1%</div>
+								<div class="range-current geo-color">10%</div>
+								<div class="range-increase" data-value="1">+1%</div>
+								<div class="range-increase" data-value="10">+10%</div>
+							</div>
+							<img src="/kleecalculator/media/miscellaneous/damage_type/dendro.png">
+							<div id="dendro-resistance" class="large-input-range" data-min="-100" data-max="100" data-percent="true">
+								<div class="range-decrease" data-value="-10">-10%</div>
+								<div class="range-decrease" data-value="-1">-1%</div>
+								<div class="range-current dendro-color">10%</div>
+								<div class="range-increase" data-value="1">+1%</div>
+								<div class="range-increase" data-value="10">+10%</div>
+							</div>
+							<img src="/kleecalculator/media/miscellaneous/damage_type/physical.png">
+							<div id="physical-resistance" class="large-input-range" data-min="-100" data-max="100" data-percent="true">
+								<div class="range-decrease" data-value="-10">-10%</div>
+								<div class="range-decrease" data-value="-1">-1%</div>
+								<div class="range-current physical-color">10%</div>
+								<div class="range-increase" data-value="1">+1%</div>
+								<div class="range-increase" data-value="10">+10%</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 
-	<div class="tab" id="about">
-		A damage calculator for Klee!<br>
-		Currently under construction...
+	<div id="weapon-modal" class="modal">
+		<div class="modal-area">
+			<div class="modal-header">
+				<div class="modal-title">Weapon Editor</div>
+				<div class="modal-close">&times;</div>
+			</div>
+			<div class="modal-content">
+				<div class="editor-section">
+					<div class="column-split">
+						<div class="editor-image">
+							<img src="/kleecalculator/media/weapon/apprentices_notes/base.png">
+						</div>
+						<div>
+							Weapon:
+							<div id="weapon-name" class="large-select-menu">
+								<div class="select-options">
+									<div class="select-option selected-option"><img src="/kleecalculator/media/weapon/apprentices_notes/base.png"> Apprentice's Notes</div>
+								</div>
+								<div class="select-label">
+									<div class="select-content"><img src="/kleecalculator/media/weapon/apprentices_notes/base.png"> Apprentice's Notes</div>
+								</div>
+							</div><br>
+							Level:
+							<div id="weapon-level" class="small-select-menu">
+								<div class="select-options">
+									<div class="select-option selected-option">1/20</div>
+									<div class="select-option">20/20</div>
+									<div class="select-option">20/40</div>
+									<div class="select-option">40/40</div>
+									<div class="select-option">40/50</div>
+									<div class="select-option">50/50</div>
+									<div class="select-option">50/60</div>
+									<div class="select-option">60/60</div>
+									<div class="select-option">60/70</div>
+									<div class="select-option">70/70</div>
+									<div class="select-option">70/80</div>
+									<div class="select-option">80/80</div>
+									<div class="select-option">80/90</div>
+									<div class="select-option">90/90</div>
+								</div>
+								<div class="select-label">
+									<div class="select-content">1/20</div>
+								</div>
+							</div><br>
+							Refinement:
+							<div id="weapon-refinement" class="small-select-menu">
+								<div class="select-options">
+									<div class="select-option selected-option">1</div>
+									<div class="select-option">2</div>
+									<div class="select-option">3</div>
+									<div class="select-option">4</div>
+									<div class="select-option">5</div>
+								</div>
+								<div class="select-label">
+									<div class="select-content">1</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 
-	<script src="/kleecalculator/script/main.js"></script>
+	<div id="flower-modal" class="modal">
+		<div class="modal-area">
+			<div class="modal-header">
+				<div class="modal-title">Flower of Life Editor</div>
+				<div class="modal-close">&times;</div>
+			</div>
+			<div class="modal-content">
+				<br><br><br><br><br><br><br><br>
+				<br><br><br><br><br><br><br><br>
+				<br><br><br><br><br><br><br><br>
+				<br><br><br><br><br><br><br><br>
+				<br><br><br><br><br><br><br><br>
+				<br><br><br><br><br><br><br><br>
+				<br><br><br><br><br><br><br><br>
+				<br><br><br><br><br><br><br><br>
+				Yahaha! You found me!
+			</div>
+		</div>
+	</div>
+
+	<div id="plume-modal" class="modal">
+		<div class="modal-area">
+			<div class="modal-header">
+				<div class="modal-title">Plume of Death Editor</div>
+				<div class="modal-close">&times;</div>
+			</div>
+			<div class="modal-content"></div>
+		</div>
+	</div>
+
+	<div id="sands-modal" class="modal">
+		<div class="modal-area">
+			<div class="modal-header">
+				<div class="modal-title">Sands of Eon Editor</div>
+				<div class="modal-close">&times;</div>
+			</div>
+			<div class="modal-content"></div>
+		</div>
+	</div>
+
+	<div id="goblet-modal" class="modal">
+		<div class="modal-area">
+			<div class="modal-header">
+				<div class="modal-title">Goblet of Eonothem Editor</div>
+				<div class="modal-close">&times;</div>
+			</div>
+			<div class="modal-content"></div>
+		</div>
+	</div>
+
+	<div id="circlet-modal" class="modal">
+		<div class="modal-area">
+			<div class="modal-header">
+				<div class="modal-title">Circlet of Logos Editor</div>
+				<div class="modal-close">&times;</div>
+			</div>
+			<div class="modal-content"></div>
+		</div>
+	</div>
+
+	<div id="content-buffs" class="content">Sorry, the Buffs tab is still a work in progress, check again later!</div>
+	<div id="content-about" class="content">Sorry, the About tab is still a work in progress, check again later!</div>
+
+	<script src="/kleecalculator/script/navigation.js"></script>
 </body>
 
 </html>

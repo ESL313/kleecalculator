@@ -1,9 +1,10 @@
 {
 	"name": "klee-calculator",
 	"version": "1.0.0",
-	"description": "A damage calculator for Klee!",
-	"main": "index.js",
+	"description": "A Genshin Impact damage calculator for Klee!",
+	"main": "scripts/server.js",
 	"scripts": {
+		"import": "node scripts/import.js",
 		"server": "node scripts/server.js"
 	},
 	"repository": {

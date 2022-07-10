@@ -1,4 +1,4 @@
 # Klee Damage Calculator
-A damage calculator for Klee!
+A Genshin Impact damage calculator for Klee!
 
 Currently under construction...
