@@ -8,11 +8,6 @@
 	transition: color 250ms var(--timing-function), background-color 250ms var(--timing-function);
 }
 
-.tab:hover {
-	background-color: var(--tertiary-color);
-	color: var(--link-color);
-}
-
 .selected-tab {
 	color: var(--link-color);
 }
@@ -69,10 +64,6 @@
 	transition: color 250ms var(--timing-function);
 }
 
-.select-option:hover {
-	color: var(--link-color);
-}
-
 .select-option img {
 	height: calc(4 * var(--length-unit));
 	width: calc(4 * var(--length-unit));
@@ -97,10 +88,6 @@
 	width: calc(4 * var(--length-unit));
 }
 
-.select-label:hover {
-	filter: brightness(115%);
-}
-
 .select-content {
 	align-items: center;
 	display: flex;
@@ -117,6 +104,7 @@
 
 .small-input-range {
 	background-color: var(--tertiary-color);
+	border-collapse: separate;
 	border-radius: calc(2 * var(--length-unit));
 	cursor: pointer;
 	display: grid;
@@ -130,6 +118,7 @@
 
 .large-input-range {
 	background-color: var(--tertiary-color);
+	border-collapse: separate;
 	border-radius: calc(2 * var(--length-unit));
 	cursor: pointer;
 	display: grid;
@@ -150,10 +139,6 @@
 	transition: filter 250ms var(--timing-function);
 	width: calc(4 * var(--length-unit));
 	z-index: 1;
-}
-
-.range-decrease:hover {
-	filter: brightness(75%);
 }
 
 .range-current {
@@ -178,10 +163,6 @@
 	transition: filter 250ms var(--timing-function);
 	width: calc(4 * var(--length-unit));
 	z-index: 1;
-}
-
-.range-increase:hover {
-	filter: brightness(75%);
 }
 
 .range-disable {
@@ -235,10 +216,6 @@
 	font-weight: bold;
 	justify-content: center;
 	width: calc(5 * var(--length-unit));
-}
-
-.modal-close:hover {
-	filter: brightness(75%);
 }
 
 .modal-content {
@@ -315,10 +292,6 @@
 	transition: filter 250ms var(--timing-function);
 }
 
-.group-damage-arrow:hover {
-	filter: brightness(75%);
-}
-
 .group-damage-arrow-flip {
 	transition: transform 500ms var(--timing-function);
 }
@@ -367,9 +340,6 @@
 	width: calc(8 * var(--length-unit));
 }
 
-.constellation-image:hover {
-	filter: brightness(150%);
-}
 
 .constellation-highlight {
 	filter: brightness(100%);
@@ -404,9 +374,6 @@
 	transition: filter 250ms var(--timing-function);
 }
 
-.equipment-content:hover {
-	filter: brightness(150%);
-}
 
 .editor-section {
 	background-color: var(--secondary-color);
@@ -504,4 +471,43 @@
 #constellations {
 	display: grid;
 	grid-template-columns: 50% 50%;
+}
+
+@media(hover: hover) and (pointer: fine) {
+	.tab:hover {
+		background-color: var(--tertiary-color);
+		color: var(--link-color);
+	}
+
+	.select-option:hover {
+		color: var(--link-color);
+	}
+
+	.select-label:hover {
+		filter: brightness(115%);
+	}
+
+	.range-decrease:hover {
+		filter: brightness(75%);
+	}
+
+	.range-increase:hover {
+		filter: brightness(75%);
+	}
+
+	.modal-close:hover {
+		filter: brightness(75%);
+	}
+
+	.group-damage-arrow:hover {
+		filter: brightness(75%);
+	}
+
+	.constellation-image:hover {
+		filter: brightness(150%);
+	}
+
+	.equipment-content:hover {
+		filter: brightness(150%);
+	}
 }

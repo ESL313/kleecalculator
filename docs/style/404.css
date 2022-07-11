@@ -11,6 +11,8 @@
 	transition: color 250ms var(--timing-function);
 }
 
-#redirect-link:hover {
-	color: var(--selected-link-color);
+@media(hover: hover) and (pointer: fine) {
+	#redirect-link:hover {
+		color: var(--selected-link-color);
+	}
 }

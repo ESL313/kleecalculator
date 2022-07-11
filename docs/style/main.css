@@ -49,10 +49,6 @@ a {
 	transition: color 250ms var(--timing-function);
 }
 
-a:hover {
-	color: var(--selected-link-color);
-}
-
 .scrollable {
 	overflow-y: auto;
 }
@@ -154,4 +150,10 @@ a:hover {
 
 .physical-color {
 	color: var(--physical-color);
+}
+
+@media(hover: hover) and (pointer: fine) {
+	a:hover {
+		color: var(--selected-link-color);
+	}
 }
