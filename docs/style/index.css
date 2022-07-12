@@ -104,8 +104,11 @@
 
 .small-input-range {
 	background-color: var(--tertiary-color);
+	border-bottom-left-radius: calc(2 * var(--length-unit));
+	border-bottom-right-radius: calc(2 * var(--length-unit));
 	border-collapse: separate;
-	border-radius: calc(2 * var(--length-unit));
+	border-top-left-radius: calc(2 * var(--length-unit));
+	border-top-right-radius: calc(2 * var(--length-unit));
 	cursor: pointer;
 	display: grid;
 	font-size: var(--very-small-font-size);
@@ -118,8 +121,11 @@
 
 .large-input-range {
 	background-color: var(--tertiary-color);
+	border-bottom-left-radius: calc(2 * var(--length-unit));
+	border-bottom-right-radius: calc(2 * var(--length-unit));
 	border-collapse: separate;
-	border-radius: calc(2 * var(--length-unit));
+	border-top-left-radius: calc(2 * var(--length-unit));
+	border-top-right-radius: calc(2 * var(--length-unit));
 	cursor: pointer;
 	display: grid;
 	font-size: var(--very-small-font-size);
