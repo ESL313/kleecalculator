@@ -104,11 +104,7 @@
 
 .small-input-range {
 	background-color: var(--tertiary-color);
-	border-bottom-left-radius: calc(2 * var(--length-unit));
-	border-bottom-right-radius: calc(2 * var(--length-unit));
-	border-collapse: separate;
-	border-top-left-radius: calc(2 * var(--length-unit));
-	border-top-right-radius: calc(2 * var(--length-unit));
+	border-radius: calc(2 * var(--length-unit));
 	cursor: pointer;
 	display: grid;
 	font-size: var(--very-small-font-size);
@@ -121,11 +117,7 @@
 
 .large-input-range {
 	background-color: var(--tertiary-color);
-	border-bottom-left-radius: calc(2 * var(--length-unit));
-	border-bottom-right-radius: calc(2 * var(--length-unit));
-	border-collapse: separate;
-	border-top-left-radius: calc(2 * var(--length-unit));
-	border-top-right-radius: calc(2 * var(--length-unit));
+	border-radius: calc(2 * var(--length-unit));
 	cursor: pointer;
 	display: grid;
 	font-size: var(--very-small-font-size);
@@ -380,6 +372,18 @@
 	transition: filter 250ms var(--timing-function);
 }
 
+.content-image {
+	align-items: center;
+	display: flex;
+	height: 100%;
+	justify-content: center;
+	transition: opacity 125ms var(--timing-function);
+	width: 100%;
+}
+
+.content-image img {
+	width: 80%;
+}
 
 .editor-section {
 	background-color: var(--secondary-color);
@@ -387,10 +391,6 @@
 	margin: calc(5 * var(--length-unit)) auto;
 	padding: calc(2 * var(--length-unit));
 	text-align: left;
-	width: 80%;
-}
-
-.editor-image img {
 	width: 80%;
 }
 

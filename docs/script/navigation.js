@@ -23,6 +23,8 @@ const modalButtons = document.getElementsByClassName('modal-button');
 for (const modalButton of modalButtons) modalButton.addEventListener('click', openModal);
 const closeModalButtons = document.getElementsByClassName('modal-close');
 for (const closeModalButton of closeModalButtons) closeModalButton.addEventListener('click', closeModal);
+const modalAreas = document.getElementsByClassName('modal');
+for (const modalArea of modalAreas) modalArea.addEventListener('click', closeModal);
 
 const arrows = document.getElementsByClassName('group-damage-arrow');
 for (const arrow of arrows) arrow.addEventListener('click', toggleCollapsible);
@@ -68,12 +70,14 @@ function changeTab(event) {
 }
 
 function changeSelection(event) {
-	const target = event.target;
-	const options = target.parentElement.children;
-	const selectMenu = event.target.parentElement.parentElement;
+	let target = event.target;
+	if (target.tagName === 'IMG') target = target.parentElement;
+	const targetIndex = Array.from(target.parentElement.children).indexOf(target);
+	const selectMenu = target.parentElement.parentElement;
 
 	// true + false + false = true and so return
 	if (selectMenu.id === 'character-level' && rangeTransitionCompleted.includes('normal-attack-level') + rangeTransitionCompleted.includes('elemental-skill-level') + rangeTransitionCompleted.includes('elemental-burst-level')) return;
+
 	if (!selectTransitionCompleted) return;
 	selectTransitionCompleted = false;
 
@@ -103,6 +107,37 @@ function changeSelection(event) {
 		}
 	}
 
+	if (selectMenu.id === 'weapon-name') {
+		// weapons JSON is sorted, select menu is sorted, just get the index
+		const selectedWeapon = weapons[Object.keys(weapons)[targetIndex]];
+		let possibleLevels = ['<div class="select-option selected-option">1/20</div>'];
+		for (const level of Object.keys(selectedWeapon)) if (level !== '1/20') possibleLevels.push(`<div class="select-option">${level}</div>`);
+
+		const weaponLevel = document.getElementById('weapon-level');
+		const weaponRefinement = document.getElementById('weapon-refinement');
+
+		const weaponLevelOptions = weaponLevel.querySelector('.select-options');
+		weaponLevelOptions.innerHTML = possibleLevels.join('\n');
+		for (const weaponLevelOption of weaponLevelOptions.children) weaponLevelOption.addEventListener('click', changeSelection);
+
+		changeImage('weapon', target.querySelector('img').src);
+
+		setSelectMenuValue(weaponLevel, 0);
+		setSelectMenuValue(weaponRefinement, 0);
+	}
+
+	if (selectMenu.id === 'weapon-level') {
+		const baseURL = document.getElementById('weapon-image').querySelector('img').src.split('/').slice(0, -1).join('/');
+		if (targetIndex < 4) changeImage('weapon', `${baseURL}/base.png`);
+		else changeImage('weapon', `${baseURL}/ascended.png`);
+	}
+
+	setSelectMenuValue(selectMenu, targetIndex);
+}
+
+function setSelectMenuValue(selectMenu, targetIndex) {
+	const options = selectMenu.querySelector('.select-options').children;
+	const target = options[targetIndex];
 	for (const option of options) option.classList.remove('selected-option');
 	target.classList.add('selected-option');
 
@@ -124,7 +159,8 @@ function changeSelection(event) {
 }
 
 function toggleSelectMenu(event) {
-	const target = event.target;
+	let target = event.target;
+	if (target.tagName === 'IMG') target = target.parentElement;
 	const targetOptions = target.parentElement.parentElement.querySelector('.select-options');
 
 	const options = document.getElementsByClassName('select-options');
@@ -177,7 +213,7 @@ function setRangeValue(element, newValue, usePercent, range) {
 }
 
 function openModal(event) {
-	const target = document.getElementById(`${event.target.id}-modal`);
+	const target = document.getElementById(`${event.target.parentElement.querySelector('img').parentElement.parentElement.id}-modal`);
 	target.style.display = 'flex';
 	// make the function not sync so transition works
 	setTimeout(() => {
@@ -187,7 +223,12 @@ function openModal(event) {
 }
 
 function closeModal(event) {
-	const target = event.target.parentElement.parentElement.parentElement;
+	let target = event.target;
+
+	if (target.classList.contains('modal-close')) target = event.target.parentElement.parentElement.parentElement;
+	else if (target.classList.contains('modal')) target = event.target;
+	else return;
+
 	target.addEventListener('transitionend', finishTransition);
 	target.style.backgroundColor = 'rgba(0, 0, 0, 0)';
 	target.querySelector('.modal-area').style.transform = 'scale(0, 0)';
@@ -221,6 +262,21 @@ function updateConstellation(event) {
 		for (const constellation of constellations) constellation.classList.remove('constellation-highlight');
 		for (let j = 0; j < amount; j++) {
 			constellations[j].classList.add('constellation-highlight');
+		}
+	}
+}
+
+function changeImage(type, imageURL) {
+	setImage(document.getElementById(type).querySelector('.content-image'));
+	setImage(document.getElementById(`${type}-image`).querySelector('.content-image'));
+	function setImage(element) {
+		element.addEventListener('transitionend', finishTransition);
+		element.style.opacity = '0%';
+
+		function finishTransition() {
+			element.removeEventListener('transitionend', finishTransition);
+			element.innerHTML = `<img src="${imageURL}">`;
+			element.style.opacity = '100%';
 		}
 	}
 }
