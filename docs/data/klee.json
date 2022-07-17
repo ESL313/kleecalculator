@@ -4,7 +4,7 @@
 			"hp_base": 801,
 			"atk_base": 24,
 			"def_base": 48,
-			"dmg_bonus": 0,
+			"pyro_bonus": 0,
 			"crit_rate": 0.05,
 			"crit_dmg": 0.50,
 			"er": 1
@@ -13,7 +13,7 @@
 			"hp_base": 2077,
 			"atk_base": 63,
 			"def_base": 124,
-			"dmg_bonus": 0,
+			"pyro_bonus": 0,
 			"crit_rate": 0.05,
 			"crit_dmg": 0.50,
 			"er": 1
@@ -22,7 +22,7 @@
 			"hp_base": 2764,
 			"atk_base": 84,
 			"def_base": 165,
-			"dmg_bonus": 0,
+			"pyro_bonus": 0,
 			"crit_rate": 0.05,
 			"crit_dmg": 0.50,
 			"er": 1
@@ -31,7 +31,7 @@
 			"hp_base": 4136,
 			"atk_base": 125,
 			"def_base": 247,
-			"dmg_bonus": 0,
+			"pyro_bonus": 0,
 			"crit_rate": 0.05,
 			"crit_dmg": 0.50,
 			"er": 1
@@ -40,7 +40,7 @@
 			"hp_base": 4623,
 			"atk_base": 140,
 			"def_base": 276,
-			"dmg_bonus": 0.072,
+			"pyro_bonus": 0.072,
 			"crit_rate": 0.05,
 			"crit_dmg": 0.50,
 			"er": 1
@@ -49,7 +49,7 @@
 			"hp_base": 5319,
 			"atk_base": 161,
 			"def_base": 318,
-			"dmg_bonus": 0.072,
+			"pyro_bonus": 0.072,
 			"crit_rate": 0.05,
 			"crit_dmg": 0.50,
 			"er": 1
@@ -58,7 +58,7 @@
 			"hp_base": 5970,
 			"atk_base": 180,
 			"def_base": 357,
-			"dmg_bonus": 0.144,
+			"pyro_bonus": 0.144,
 			"crit_rate": 0.05,
 			"crit_dmg": 0.50,
 			"er": 1
@@ -67,7 +67,7 @@
 			"hp_base": 6673,
 			"atk_base": 202,
 			"def_base": 399,
-			"dmg_bonus": 0.144,
+			"pyro_bonus": 0.144,
 			"crit_rate": 0.05,
 			"crit_dmg": 0.50,
 			"er": 1
@@ -76,7 +76,7 @@
 			"hp_base": 7161,
 			"atk_base": 216,
 			"def_base": 428,
-			"dmg_bonus": 0.144,
+			"pyro_bonus": 0.144,
 			"crit_rate": 0.05,
 			"crit_dmg": 0.50,
 			"er": 1
@@ -85,7 +85,7 @@
 			"hp_base": 7870,
 			"atk_base": 238,
 			"def_base": 470,
-			"dmg_bonus": 0.144,
+			"pyro_bonus": 0.144,
 			"crit_rate": 0.05,
 			"crit_dmg": 0.50,
 			"er": 1
@@ -94,7 +94,7 @@
 			"hp_base": 8358,
 			"atk_base": 253,
 			"def_base": 500,
-			"dmg_bonus": 0.216,
+			"pyro_bonus": 0.216,
 			"crit_rate": 0.05,
 			"crit_dmg": 0.50,
 			"er": 1
@@ -103,7 +103,7 @@
 			"hp_base": 9076,
 			"atk_base": 274,
 			"def_base": 542,
-			"dmg_bonus": 0.216,
+			"pyro_bonus": 0.216,
 			"crit_rate": 0.05,
 			"crit_dmg": 0.50,
 			"er": 1
@@ -112,7 +112,7 @@
 			"hp_base": 9563,
 			"atk_base": 289,
 			"def_base": 572,
-			"dmg_bonus": 0.288,
+			"pyro_bonus": 0.288,
 			"crit_rate": 0.05,
 			"crit_dmg": 0.50,
 			"er": 1
@@ -121,7 +121,7 @@
 			"hp_base": 10287,
 			"atk_base": 311,
 			"def_base": 615,
-			"dmg_bonus": 0.288,
+			"pyro_bonus": 0.288,
 			"crit_rate": 0.05,
 			"crit_dmg": 0.50,
 			"er": 1
@@ -129,7 +129,7 @@
 	},
 	"talents": {
 		"normal_attack_1": {
-			"scaleWith": "talent_normal_attack",
+			"scaleWith": "normal_attack",
 			"scaling": {
 				"1": 0.7216,
 				"2": 0.7757,
@@ -145,7 +145,7 @@
 			}
 		},
 		"normal_attack_2": {
-			"scaleWith": "talent_normal_attack",
+			"scaleWith": "normal_attack",
 			"scaling": {
 				"1": 0.6240,
 				"2": 0.6708,
@@ -161,7 +161,7 @@
 			}
 		},
 		"normal_attack_3": {
-			"scaleWith": "talent_normal_attack",
+			"scaleWith": "normal_attack",
 			"scaling": {
 				"1": 0.8992,
 				"2": 0.9666,
@@ -177,7 +177,7 @@
 			}
 		},
 		"charge_attack": {
-			"scaleWith": "talent_normal_attack",
+			"scaleWith": "normal_attack",
 			"scaling": {
 				"1": 1.5736,
 				"2": 1.6916,
@@ -193,7 +193,7 @@
 			}
 		},
 		"elemental_skill_bounce": {
-			"scaleWith": "talent_elemental_skill",
+			"scaleWith": "elemental_skill",
 			"scaling": {
 				"1": 0.9520,
 				"2": 1.0234,
@@ -212,7 +212,7 @@
 			}
 		},
 		"elemental_skill_mines": {
-			"scaleWith": "talent_elemental_skill",
+			"scaleWith": "elemental_skill",
 			"scaling": {
 				"1": 0.3280,
 				"2": 0.3526,
@@ -231,7 +231,7 @@
 			}
 		},
 		"elemental_burst": {
-			"scaleWith": "talent_elemental_burst",
+			"scaleWith": "elemental_burst",
 			"scaling": {
 				"1": 0.4264,
 				"2": 0.4584,
